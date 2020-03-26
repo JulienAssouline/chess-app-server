@@ -39,6 +39,7 @@ const getData = async () => {
       const allData = await Promise.all(promises);
 
       const results = allData.map(d => d.data.games);
+      console.log(results);
       return results;
     }
   } catch (error) {
