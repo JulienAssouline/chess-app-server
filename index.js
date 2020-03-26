@@ -13,7 +13,7 @@ app.set("view engine", "ejs");
 
 app.use(
   cors({
-    origin: "https://stoic-spence-5f0ef9.netlify.com/",
+    origin: "https://stoic-spence-5f0ef9.netlify.com",
     credentials: true
   })
 );
