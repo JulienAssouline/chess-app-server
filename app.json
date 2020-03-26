@@ -1,0 +1,6 @@
+{
+  "name": "chess app tracker",
+  "description": "simple server for fetching chess.com data",
+  "repository": "https://github.com/JulienAssouline/chess-app-server.git",
+  "keywords": ["node", "heroku", "express"]
+}

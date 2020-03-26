@@ -4,7 +4,12 @@ const axios = require("axios");
 
 const app = express();
 
-const PORT = 8080;
+app.set("port", process.env.PORT || 8080);
+
+app.use(express.static(__dirname + "/public"));
+
+app.set("views", __dirname + "/views");
+app.set("view engine", "ejs");
 
 app.use(
   cors({
@@ -39,7 +44,6 @@ const getData = async () => {
       const allData = await Promise.all(promises);
 
       const results = allData.map(d => d.data.games);
-      console.log(results);
       return results;
     }
   } catch (error) {
@@ -58,8 +62,8 @@ app.get("/chess-games", (req, res) => {
   getAllGamesData(req, res);
 });
 
-app.listen(PORT, () =>
-  console.log(`server listening on port http://localhost:${PORT}`)
+app.listen(app.get("port"), () =>
+  console.log(`server listening on port http://localhost:${app.get("port")}`)
 );
 
 module.exports = app;
