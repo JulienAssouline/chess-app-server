@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
+const rateLimit = require("axios-rate-limit");
 
 const app = express();
 
@@ -37,8 +38,15 @@ const getData = async () => {
     if (allGames.archives.length !== 0) {
       const promises = [];
 
+      const http = rateLimit(axios.create(), {
+        maxRequests: 2,
+        perMilliseconds: 1000,
+        maxRPS: 2
+      });
+      http.getMaxRPS();
+
       allGames.archives.forEach(d => {
-        promises.push(axios.get(d));
+        promises.push(http.get(d));
       });
 
       const allData = await Promise.all(promises);
